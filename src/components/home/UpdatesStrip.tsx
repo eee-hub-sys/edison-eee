@@ -49,26 +49,33 @@ const UpdatesStrip = () => {
     }, []);
 
     return (
-        <div className="w-full bg-primary/10 border-y border-white/10 overflow-hidden py-3 flex items-center my-16 backdrop-blur-md">
-            <div className="bg-primary text-[#25343F] px-4 py-1 text-xs font-black montserrat tracking-tighter shrink-0 z-10 shadow-lg">
+        <div className="w-full bg-primary/10 border-y border-white/10 overflow-hidden py-4 flex items-center my-16 backdrop-blur-md">
+            <div className="bg-primary text-[#25343F] px-4 py-1.5 text-[10px] md:text-xs font-black montserrat tracking-tighter shrink-0 z-10 shadow-xl ml-4 rounded-sm">
                 LATEST PULSE
             </div>
-            <div className="flex-1 overflow-hidden relative">
-                <div className="flex animate-marquee whitespace-nowrap gap-12 text-sm font-medium tracking-wide">
-                    {[...updates, ...updates, ...updates].map((update, i) => (
-                        <span key={i} className="shrink-0">
-                            {update}
-                        </span>
+            <div className="flex-1 overflow-hidden relative ml-8">
+                <div className="flex animate-marquee whitespace-nowrap gap-16 text-xs md:text-sm font-bold tracking-widest uppercase">
+                    {[...Array(10)].map((_, groupIndex) => (
+                        <React.Fragment key={groupIndex}>
+                            {updates.map((update, i) => (
+                                <div key={`${groupIndex}-${i}`} className="flex items-center gap-6 shrink-0">
+                                    <span className="text-white">
+                                        {update}
+                                    </span>
+                                    <span className="text-primary/40">✦</span>
+                                </div>
+                            ))}
+                        </React.Fragment>
                     ))}
                 </div>
             </div>
             <style jsx>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-33.33%); }
+          100% { transform: translateX(-10%); }
         }
         .animate-marquee {
-          animation: marquee 30s linear infinite;
+          animation: marquee 60s linear infinite;
         }
         .animate-marquee:hover {
           animation-play-state: paused;
