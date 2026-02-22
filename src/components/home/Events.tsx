@@ -6,16 +6,18 @@ import { getEvents, Event } from "@/lib/db";
 import { motion } from "framer-motion";
 import { Calendar, Tag } from "lucide-react";
 
-const Events = () => {
-    const [events, setEvents] = useState<Event[]>([]);
+const Events = ({ initialEvents = [] }: { initialEvents?: Event[] }) => {
+    const [events, setEvents] = useState<Event[]>(initialEvents);
 
     useEffect(() => {
         const fetchEvents = async () => {
             const data = await getEvents();
             setEvents(data);
         };
-        fetchEvents();
-    }, []);
+        if (events.length === 0) {
+            fetchEvents();
+        }
+    }, [events.length]);
 
     return (
         <section id="events" className="py-24">
@@ -51,6 +53,7 @@ const Events = () => {
                                     src={event.image}
                                     alt={event.title}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute top-4 left-4 bg-primary px-3 py-1 rounded-full text-[10px] md:text-xs font-black montserrat uppercase tracking-widest text-white shadow-lg z-10">

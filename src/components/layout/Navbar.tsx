@@ -48,6 +48,7 @@ const Navbar = () => {
                         src="/vg.jpeg"
                         alt="Vignan Logo"
                         fill
+                        priority
                         className="object-contain object-left"
                     />
                 </div>
@@ -58,6 +59,7 @@ const Navbar = () => {
                         src="/eee-logo.png"
                         alt="Edison Club Logo"
                         fill
+                        priority
                         className="object-contain p-1"
                     />
                 </div>

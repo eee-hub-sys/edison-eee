@@ -330,28 +330,26 @@ const AdminPage = () => {
             console.error("Error updating status:", result.error);
             alert("Failed to update status: " + result.error);
         } else {
-            // Email Sending Logic for Accepted Status
+            fetchRegistrations();
+            // Email Sending Logic for Accepted Status in background
             if (newStatus === 'accepted') {
                 const reg = registrations.find(r => r.id === id);
                 if (reg && reg.email) {
-                    try {
-                        await emailjs.send(
-                            "service_hmbpntj", // Your Service ID
-                            "template_krpimmo", // Replace with your Acceptance Template ID
-                            {
-                                to_name: reg.name,
-                                to_email: reg.email,
-                                club_name: reg.club,
-                                message: `Congratulations! Your application for ${reg.club} has been accepted. Welcome to the team!`,
-                            },
-                            "wkedLSVzh-u7CXVRU" // Replace with your Public Key
-                        );
-                    } catch (emailError) {
+                    emailjs.send(
+                        "service_hmbpntj", // Your Service ID
+                        "template_krpimmo", // Replace with your Acceptance Template ID
+                        {
+                            to_name: reg.name,
+                            to_email: reg.email,
+                            club_name: reg.club,
+                            message: `Congratulations! Your application for ${reg.club} has been accepted. Welcome to the team!`,
+                        },
+                        "wkedLSVzh-u7CXVRU" // Replace with your Public Key
+                    ).catch(emailError => {
                         console.error("Acceptance Email Error:", emailError);
-                    }
+                    });
                 }
             }
-            fetchRegistrations();
         }
     };
 

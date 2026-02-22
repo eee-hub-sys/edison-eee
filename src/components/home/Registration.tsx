@@ -38,26 +38,24 @@ const Registration = () => {
         try {
             const result = await submitRegistrationAction(formData);
             if (result.success) {
-                // EmailJS Sending Logic
-                try {
-                    await emailjs.send(
-                        "service_hmbpntj", // Replace with your Service ID
-                        "template_i6yr8oo", // Replace with your Template ID
-                        {
-                            to_name: formData.name,
-                            to_email: formData.email,
-                            club_name: formData.club,
-                            roll_number: formData.roll_number,
-                            message: `Welcome to ${formData.club}! Your registration as a member has been received and is currently pending approval.`,
-                        },
-                        "wkedLSVzh-u7CXVRU" // Replace with your Public Key
-                    );
-                } catch (emailError) {
-                    console.error("Email Sending Error:", emailError);
-                }
-
                 setSuccess(true);
                 setFormData({ name: "", email: "", roll_number: "", club: "", mobile: "", year: "" });
+
+                // EmailJS Sending Logic in background
+                emailjs.send(
+                    "service_hmbpntj", // Replace with your Service ID
+                    "template_i6yr8oo", // Replace with your Template ID
+                    {
+                        to_name: formData.name,
+                        to_email: formData.email,
+                        club_name: formData.club,
+                        roll_number: formData.roll_number,
+                        message: `Welcome to ${formData.club}! Your registration as a member has been received and is currently pending approval.`,
+                    },
+                    "wkedLSVzh-u7CXVRU" // Replace with your Public Key
+                ).catch(emailError => {
+                    console.error("Email Sending Error:", emailError);
+                });
             } else {
                 setError(result.error || "Registration failed. Please try again.");
             }

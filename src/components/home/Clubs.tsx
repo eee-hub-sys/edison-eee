@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ShieldCheck, GraduationCap, Phone, Hash } from "lucide-react";
 import Image from "next/image";
 
-const Clubs = () => {
-    const [clubs, setClubs] = useState<Club[]>([]);
-    const [coordinators, setCoordinators] = useState<Coordinator[]>([]);
+const Clubs = ({ initialClubs = [], initialCoordinators = [] }: { initialClubs?: Club[], initialCoordinators?: Coordinator[] }) => {
+    const [clubs, setClubs] = useState<Club[]>(initialClubs);
+    const [coordinators, setCoordinators] = useState<Coordinator[]>(initialCoordinators);
     const [selectedClub, setSelectedClub] = useState<Club | null>(null);
 
     useEffect(() => {

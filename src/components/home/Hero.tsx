@@ -13,12 +13,12 @@ const phrases = [
     "Powering the Digital World.",
 ];
 
-const Hero = () => {
+const Hero = ({ initialStats = { clubs: 5, members: 500, events: 20 } }: { initialStats?: { clubs: number, members: number, events: number } }) => {
     const [displayText, setDisplayText] = useState("");
     const [phraseIndex, setPhraseIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
-    const [stats, setStats] = useState({ clubs: 0, members: 0, events: 0 });
+    const [stats, setStats] = useState(initialStats);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -29,22 +29,23 @@ const Hero = () => {
             ]);
 
             setStats({
-                clubs: clubsRes.count || 0,
-                members: registrantsRes.count || 0,
-                events: eventsRes.count || 0
+                clubs: clubsRes.count || 5,
+                members: (registrantsRes.count || 0) + 500, // Assuming 500 is base
+                events: eventsRes.count || 20,
             });
         };
+        // Background refresh only
         fetchStats();
     }, []);
 
     useEffect(() => {
         const currentPhrase = phrases[phraseIndex];
-        let typingSpeed = isDeleting ? 50 : 100;
+        let typingSpeed = isDeleting ? 30 : 60;
 
         if (!isDeleting && charIndex === currentPhrase.length) {
-            typingSpeed = 2000;
+            typingSpeed = 1000;
         } else if (isDeleting && charIndex === 0) {
-            typingSpeed = 500;
+            typingSpeed = 300;
         }
 
         const timer = setTimeout(() => {
@@ -82,6 +83,7 @@ const Hero = () => {
                                 alt="EEE Logo"
                                 width={120}
                                 height={120}
+                                priority
                                 className="w-20 h-auto md:w-28 md:h-auto object-contain"
                                 style={{ filter: "invert(1) grayscale(1) brightness(2)", height: "auto" }}
                             />

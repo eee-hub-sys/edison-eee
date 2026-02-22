@@ -6,8 +6,8 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
 
-const Gallery = () => {
-    const [gallery, setGallery] = useState<GalleryItem[]>([]);
+const Gallery = ({ initialGallery = [] }: { initialGallery?: GalleryItem[] }) => {
+    const [gallery, setGallery] = useState<GalleryItem[]>(initialGallery);
     const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
 
     useEffect(() => {
@@ -15,8 +15,10 @@ const Gallery = () => {
             const data = await getGallery();
             setGallery(data);
         };
-        fetchGallery();
-    }, []);
+        if (gallery.length === 0) {
+            fetchGallery();
+        }
+    }, [gallery.length]);
 
     return (
         <section id="gallery" className="py-24 bg-background">
@@ -53,6 +55,7 @@ const Gallery = () => {
                                 alt={item.title}
                                 width={600}
                                 height={400}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 className="w-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-linear-to-t from-[#25343F]/80 via-[#25343F]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">

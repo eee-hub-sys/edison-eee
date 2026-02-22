@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
-const UpdatesStrip = () => {
-    const [updates, setUpdates] = useState<string[]>([]);
+const UpdatesStrip = ({ initialUpdates = [] }: { initialUpdates?: string[] }) => {
+    const [updates, setUpdates] = useState<string[]>(initialUpdates.length > 0 ? initialUpdates : []);
 
     useEffect(() => {
         const fetchUpdates = async () => {
@@ -29,7 +29,9 @@ const UpdatesStrip = () => {
             }
         };
 
-        fetchUpdates();
+        if (updates.length === 0) {
+            fetchUpdates();
+        }
 
         // Subscribe to real-time updates
         const channel = supabase
@@ -46,7 +48,7 @@ const UpdatesStrip = () => {
         return () => {
             supabase.removeChannel(channel);
         };
-    }, []);
+    }, [updates.length]);
 
     return (
         <div className="w-full bg-primary/10 border-y border-white/10 overflow-hidden py-4 flex items-center my-16 backdrop-blur-md">
@@ -75,7 +77,7 @@ const UpdatesStrip = () => {
           100% { transform: translateX(-10%); }
         }
         .animate-marquee {
-          animation: marquee 60s linear infinite;
+          animation: marquee 12s linear infinite;
         }
         .animate-marquee:hover {
           animation-play-state: paused;
