@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #25343F;
+  --foreground: #EAEFEF;
+  --primary: #FF9B51;
+  --secondary: #25343F;
+  --accent: #BFC9D1;
+  --text-muted: #BFC9D1;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-text-muted: var(--text-muted);
+  --font-times: "Times New Roman", Times, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-white/10;
+  }
+
+  body {
+    @apply bg-background text-foreground font-times antialiased selection:bg-primary/30;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .montserrat,
+  .font-poppins,
+  .font-mono {
+    @apply font-times;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-secondary px-8 py-3 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_4px_15px_#FF9B5166] hover:shadow-[0_6px_20px_#FF9B5199];
+  }
+
+  .glass-card {
+    @apply bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl transition-all hover:bg-white/10;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px #FF9B5180;
+  }
 }

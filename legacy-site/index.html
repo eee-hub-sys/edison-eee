@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="EDISON – EEE Department Club Portal. Showcasing innovation, technology and leadership within the Electrical & Electronics Engineering department." />
+  <title>EDISON – EEE Department Club Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- Mesh Gradient Background -->
+  <div class="body-mesh"></div>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">EDISON</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#clubs" class="nav-link">Clubs</a></li>
+        <li><a href="#events" class="nav-link">Events</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#register" class="nav-link nav-cta">Join Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge" data-aos="fade-down">⚡ Department of EEE</div>
+        <h1 class="hero-title" data-aos="fade-up">
+          Welcome to <span class="glow-text">EDISON</span>
+        </h1>
+        <p class="hero-tagline" id="typewriter" data-aos="fade-up" data-aos-delay="100"></p>
+        <p class="hero-sub" data-aos="fade-up" data-aos-delay="200">
+          Empowering the next generation of engineers through innovation, leadership, and technical excellence in
+          Electrical & Electronics Engineering.
+        </p>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
+          <a href="#clubs" class="btn btn-primary">Explore Clubs</a>
+          <a href="#register" class="btn btn-outline">Join Community</a>
+        </div>
+        <div class="hero-stats" data-aos="fade-up" data-aos-delay="400"
+          style="margin-top: 60px; display: flex; gap: 40px;">
+          <div class="stat"><span class="stat-num" data-count="5">0</span><span class="stat-label">Sub-Clubs</span>
+          </div>
+          <div class="stat"><span class="stat-num" data-count="500">0</span><span class="stat-label">Members</span>
+          </div>
+          <div class="stat"><span class="stat-num" data-count="30">0</span><span class="stat-label">Events</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual" data-aos="fade-left">
+      <!-- Animated circuit can be added here -->
+    </div>
+  </section>
+
+  <!-- ========== UPDATES STRIP ========== -->
+  <div class="updates-strip" id="updates">
+    <div class="strip-label">LATEST PULSE</div>
+    <div class="strip-track-wrapper">
+      <div class="strip-track" id="strip-track">
+        <!-- Dynnamically populated from Google Sheets -->
+        <span class="strip-item">⚡ Syncing with EDISON Newsroom...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">Vision & Journey</span>
+        <h2 class="section-title">Innovating Beyond <span class="highlight">Boundaries</span></h2>
+        <p class="section-desc" style="max-width: 700px; margin: 20px auto; color: var(--text-muted);">
+          EDISON serves as a catalyst for creative engineering minds, bridging the gap between academic theory and
+          real-world technological challenges.
+        </p>
+      </div>
+      <div class="about-grid"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <div class="about-card" data-aos="fade-up" data-aos-delay="100"
+          style="background: var(--bg-card); padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--glass-border);">
+          <div class="about-icon" style="font-size: 2.5rem; margin-bottom: 20px;">🚀</div>
+          <h3>Future Forward</h3>
+          <p style="color: var(--text-muted);">Harnessing emerging technologies to create sustainable and intelligent
+            solutions for global energy needs.</p>
+        </div>
+        <div class="about-card" data-aos="fade-up" data-aos-delay="200"
+          style="background: var(--bg-card); padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--glass-border);">
+          <div class="about-icon" style="font-size: 2.5rem; margin-bottom: 20px;">🛡️</div>
+          <h3>Technical Excellence</h3>
+          <p style="color: var(--text-muted);">Rigorous mentorship and hands-on laboratory experiences to master the
+            fundamentals of EEE.</p>
+        </div>
+        <div class="about-card" data-aos="fade-up" data-aos-delay="300"
+          style="background: var(--bg-card); padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--glass-border);">
+          <div class="about-icon" style="font-size: 2.5rem; margin-bottom: 20px;">🤝</div>
+          <h3>Collaborative Growth</h3>
+          <p style="color: var(--text-muted);">A vibrant ecosystem where students, faculty, and industry experts
+            converge to exchange groundbreaking ideas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SUB-CLUBS SECTION ========== -->
+  <section class="clubs-section" id="clubs" style="background: rgba(255, 255, 255, 0.02);">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">Specialized Domains</span>
+        <h2 class="section-title">The <span class="highlight">Core 5</span> Hubs</h2>
+        <p class="section-desc">Each sub-club is a specialized center of excellence within the department.</p>
+      </div>
+      <div class="clubs-grid" id="clubs-grid">
+        <!-- Dynamic Bento Grid Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EVENTS SECTION ========== -->
+  <section class="events-section" id="events">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">Calendars & Milestones</span>
+        <h2 class="section-title">Upcoming <span class="highlight">Events</span></h2>
+      </div>
+
+      <div class="events-grid" id="events-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY SECTION ========== -->
+  <section class="gallery-section" id="gallery" style="background: rgba(255, 255, 255, 0.02);">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">Visual Chronicles</span>
+        <h2 class="section-title">Momentum <span class="highlight">Gallery</span></h2>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"
+        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== REGISTRATION SECTION ========== -->
+  <section class="register-section" id="register">
+    <div class="container">
+      <div class="register-wrapper"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 80px; align-items: center;">
+        <div class="register-info" data-aos="fade-right">
+          <span class="section-tag">Join EDISON</span>
+          <h2 class="section-title">Ready to <span class="highlight">Plug In?</span></h2>
+          <p style="margin: 20px 0; color: var(--text-muted); font-size: 1.1rem;">
+            Join over 500+ active members and start your journey in engineering excellence today.
+          </p>
+          <ul style="list-style: none; color: var(--text-muted);">
+            <li style="margin-bottom: 12px;">✔️ Industry-grade Workshops</li>
+            <li style="margin-bottom: 12px;">✔️ National Level Competitions</li>
+            <li style="margin-bottom: 12px;">✔️ Exclusive Alumni Network</li>
+          </ul>
+        </div>
+        <div class="register-form-card" data-aos="fade-left">
+          <h3 style="margin-bottom: 30px; font-size: 1.5rem;">Membership Application</h3>
+          <form id="register-form">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" name="name" placeholder="John Doe" required />
+              <span class="error-msg" id="err-name"></span>
+            </div>
+            <div class="form-group">
+              <label>Roll Number</label>
+              <input type="text" name="roll_number" placeholder="EEE2024..." required />
+              <span class="error-msg" id="err-roll"></span>
+            </div>
+            <div class="form-group">
+              <label>Preferred Club</label>
+              <select name="club" required>
+                <option value="">Select Domain</option>
+                <option value="Green Energy">Green Energy</option>
+                <option value="Echo">Echo</option>
+                <option value="Vidyut">Vidyut</option>
+                <option value="Krida">Krida</option>
+                <option value="Tech Forge Club">Tech Forge Club</option>
+              </select>
+              <span class="error-msg" id="err-club"></span>
+            </div>
+            <div class="form-group">
+              <label>Mobile Number</label>
+              <input type="tel" name="mobile" maxlength="10" placeholder="10 Digits" required />
+              <span class="error-msg" id="err-mobile"></span>
+            </div>
+            <div class="form-group">
+              <label>Academic Year</label>
+              <select name="year" required>
+                <option value="">Current Year</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+              </select>
+              <span class="error-msg" id="err-year"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-btn" style="width: 100%;">
+              <span id="btn-text">Initiate Membership</span>
+              <span id="btn-loader" class="btn-loader hidden">...</span>
+            </button>
+          </form>
+          <div class="success-message hidden" id="success-message" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 20px;">⚡</div>
+            <h4>Welcome to the Grid!</h4>
+            <p>Your membership application has been logged.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px; margin-bottom: 60px;">
+        <div>
+          <div class="footer-logo">⚡ EDISON</div>
+          <p style="color: var(--text-muted);">The heartbeat of EEE Department. Powering tomorrow, today.</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 20px;">Navigation</h4>
+          <ul style="list-style: none; display: grid; gap: 10px;">
+            <li><a href="#home" style="color: var(--text-muted); text-decoration: none;">Home</a></li>
+            <li><a href="#about" style="color: var(--text-muted); text-decoration: none;">About</a></li>
+            <li><a href="#clubs" style="color: var(--text-muted); text-decoration: none;">Clubs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 20px;">Contact</h4>
+          <p style="color: var(--text-muted);">📍 EEE Dept. Science Block</p>
+          <p style="color: var(--text-muted);">📧 edison@eee.edu</p>
+        </div>
+      </div>
+      <div
+        style="padding-top: 40px; border-top: 1px solid var(--glass-border); text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+        <p>© 2024 EDISON EEE Portal. Built for the Future.</p>
+        <a href="admin.html"
+          style="color: var(--primary); text-decoration: none; margin-top: 10px; display: inline-block;">Admin
+          Gateway</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">✕</button>
+    <div class="lightbox-content">
+      <div id="lightbox-img-wrap"></div>
+      <p id="lightbox-caption" style="margin-top: 20px; text-align: center;"></p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
