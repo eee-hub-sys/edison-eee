@@ -689,16 +689,28 @@ const AdminPage = () => {
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {clubs.map(club => (
-                                    <div key={club.id} className="glass-card group flex flex-col">
-                                        <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-3xl mb-4 group-hover:bg-primary/20 transition-colors">{club.icon}</div>
-                                        <h4 className="text-xl font-bold montserrat mb-2">{club.name}</h4>
-                                        <p className="text-xs text-text-muted line-clamp-3 mb-6 flex-1">{club.description}</p>
-                                        <div className="space-y-2 pt-4 border-t border-white/10 mb-6">
-                                            <div className="text-[10px] flex justify-between"><span className="text-primary font-bold uppercase tracking-widest">Faculty:</span> <span className="text-white/70">{club.faculty}</span></div>
-                                            <div className="text-[10px] flex justify-between"><span className="text-primary font-bold uppercase tracking-widest">Leads:</span> <span className="text-white/70 truncate ml-4">{club.student}</span></div>
+                                    <div key={club.id} className="glass-card group flex flex-col p-6 md:p-8">
+                                        <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-6 group-hover:bg-primary/20 transition-colors">{club.icon}</div>
+                                        <h4 className="text-xl md:text-2xl font-black montserrat mb-3">{club.name}</h4>
+                                        <p className="text-sm text-text-muted leading-relaxed line-clamp-3 mb-8 flex-1">{club.description}</p>
+
+                                        <div className="space-y-4 pt-6 border-t border-white/10 mb-8">
+                                            <div className="flex flex-col gap-1">
+                                                <span className="text-[10px] text-primary font-black uppercase tracking-[0.2em]">Faculty Mentor</span>
+                                                <span className="text-sm text-white font-medium">{club.faculty}</span>
+                                            </div>
+                                            <div className="flex flex-col gap-1">
+                                                <span className="text-[10px] text-primary font-black uppercase tracking-[0.2em]">Student Leads</span>
+                                                <span className="text-sm text-white/80 font-medium line-clamp-2 leading-snug">{club.student}</span>
+                                            </div>
                                         </div>
-                                        <button onClick={() => setEditingClub(club)} className="w-full bg-white/5 hover:bg-primary/20 border border-white/10 py-3 rounded-xl text-xs font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 text-text-muted hover:text-primary">
-                                            <Edit3 size={14} /> Configure Hub
+
+                                        <button
+                                            onClick={() => setEditingClub(club)}
+                                            className="w-full bg-white/5 hover:bg-primary/20 border border-white/10 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 text-text-muted hover:text-primary group/btn"
+                                        >
+                                            <Edit3 size={16} className="group-hover/btn:scale-110 transition-transform" />
+                                            Configure Hub
                                         </button>
                                     </div>
                                 ))}
