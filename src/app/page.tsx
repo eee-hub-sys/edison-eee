@@ -11,17 +11,18 @@ import { supabase } from "@/lib/supabase";
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function Home() {
-  const [clubs, coordinators, events, gallery, updatesRes] = await Promise.all([
+  const [clubs, coordinators, events, gallery, updatesRes, registrantsRes] = await Promise.all([
     getClubs(),
     getCoordinators(),
     getEvents(),
     getGallery(),
-    supabase.from('updates').select('message').order('created_at', { ascending: false }).limit(10)
+    supabase.from('updates').select('message').order('created_at', { ascending: false }).limit(10),
+    supabase.from('registrations').select('*', { count: 'exact', head: true })
   ]);
 
   const stats = {
     clubs: clubs.length,
-    members: 500, // Static fallback or fetch if needed
+    members: registrantsRes.count || 0, // Dynamic registrants count
     events: events.length
   };
 

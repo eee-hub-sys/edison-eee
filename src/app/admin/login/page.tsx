@@ -38,38 +38,38 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#25343F] flex items-center justify-center p-6 bg-[radial-gradient(circle_at_50%_50%,rgba(255,155,81,0.05),transparent)]">
+        <div className="min-h-screen bg-background flex items-center justify-center p-6 bg-[radial-gradient(circle_at_50%_50%,rgba(250,129,18,0.08),transparent)]">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full max-w-md"
             >
                 <div className="flex items-center gap-4 justify-center mb-12">
-                    <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-2xl border border-white/10 backdrop-blur-sm">
-                        <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/50 shadow-[0_0_30px_-10px_rgba(255,155,81,0.5)]">
+                    <div className="flex items-center gap-3 bg-secondary/70 px-4 py-2 rounded-2xl border border-black/10 backdrop-blur-sm">
+                        <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/50 shadow-[0_0_30px_-10px_rgba(250,129,18,0.5)]">
                             <Zap className="text-primary fill-current" size={24} />
                         </div>
-                        <span className="text-2xl font-black montserrat tracking-tighter text-white">EDISON</span>
+                        <span className="text-2xl font-black montserrat tracking-tighter text-foreground">EDISON</span>
                     </div>
-                    <div className="w-px h-8 bg-white/20 mx-2" />
-                    <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <div className="w-px h-8 bg-black/20 mx-2" />
+                    <div className="flex items-center gap-3 bg-secondary/70 px-4 py-2 rounded-2xl border border-black/10 backdrop-blur-sm">
                         <Image
                             src="/eee-logo.png"
                             alt="EEE Logo"
                             width={40}
                             height={40}
                             className="w-10 h-10 object-contain"
-                            style={{ filter: "invert(1) grayscale(1) brightness(2)", height: "auto" }}
+                            style={{ filter: "contrast(1.1) saturate(0.8)", height: "auto" }}
                         />
-                        <span className="text-xl font-black montserrat tracking-tighter text-white/40">EEE</span>
+                        <span className="text-xl font-black montserrat tracking-tighter text-foreground">EEE</span>
                     </div>
                 </div>
 
-                <div className="glass-card p-10 border-white/10 relative overflow-hidden group">
+                <div className="glass-card p-10 border-black/10 relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                     <div className="mb-8 text-center">
-                        <h1 className="text-2xl font-bold montserrat text-white mb-2">Security Gateway</h1>
+                        <h1 className="text-2xl font-bold montserrat text-foreground mb-2">Security Gateway</h1>
                         <p className="text-text-muted text-sm uppercase tracking-widest font-black flex items-center justify-center gap-2">
                             <ShieldCheck size={14} className="text-primary" />
                             Admin Authentication
@@ -86,7 +86,7 @@ const LoginPage = () => {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="admin@edison.eee"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 focus:border-primary outline-none transition-all text-white placeholder:text-white/20"
+                                    className="w-full bg-black/5 border border-black/10 rounded-xl py-4 pl-12 pr-4 focus:border-primary outline-none transition-all text-foreground placeholder:text-foreground/30"
                                     required
                                 />
                             </div>
@@ -101,7 +101,7 @@ const LoginPage = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="••••••••"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 focus:border-primary outline-none transition-all text-white placeholder:text-white/20"
+                                    className="w-full bg-black/5 border border-black/10 rounded-xl py-4 pl-12 pr-4 focus:border-primary outline-none transition-all text-foreground placeholder:text-foreground/30"
                                     required
                                 />
                             </div>

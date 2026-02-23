@@ -84,7 +84,7 @@ const Navbar = () => {
                             <li key={link.name}>
                                 <Link
                                     href={link.href}
-                                    className="text-[10px] xl:text-sm font-semibold text-foreground/80 hover:text-primary transition-colors uppercase tracking-widest"
+                                    className="text-sm xl:text-base font-semibold text-foreground/80 hover:text-primary transition-colors uppercase tracking-widest"
                                 >
                                     {link.name}
                                 </Link>

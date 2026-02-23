@@ -67,7 +67,7 @@ const Registration = () => {
     };
 
     return (
-        <section id="register" className="py-20 md:py-24 relative overflow-hidden">
+        <section id="register" className="py-10 md:py-14 relative overflow-hidden">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-16">
                     <motion.div

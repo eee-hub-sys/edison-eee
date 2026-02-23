@@ -13,7 +13,7 @@ const phrases = [
     "Powering the Digital World.",
 ];
 
-const Hero = ({ initialStats = { clubs: 5, members: 500, events: 20 } }: { initialStats?: { clubs: number, members: number, events: number } }) => {
+const Hero = ({ initialStats = { clubs: 5, members: 0, events: 0 } }: { initialStats?: { clubs: number, members: number, events: number } }) => {
     const [displayText, setDisplayText] = useState("");
     const [phraseIndex, setPhraseIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
@@ -30,8 +30,8 @@ const Hero = ({ initialStats = { clubs: 5, members: 500, events: 20 } }: { initi
 
             setStats({
                 clubs: clubsRes.count || 5,
-                members: (registrantsRes.count || 0) + 500, // Assuming 500 is base
-                events: eventsRes.count || 20,
+                members: registrantsRes.count || 0, // True data
+                events: eventsRes.count || 0, // True data
             });
         };
         // Background refresh only
@@ -163,11 +163,11 @@ const Hero = ({ initialStats = { clubs: 5, members: 500, events: 20 } }: { initi
                             <span className="text-[10px] md:text-sm text-text-muted uppercase tracking-widest font-bold">Sub-Clubs</span>
                         </div>
                         <div className="flex flex-col items-center">
-                            <span className="text-3xl md:text-4xl font-black montserrat text-foreground">{stats.members}+</span>
+                            <span className="text-3xl md:text-4xl font-black montserrat text-foreground">{stats.members}</span>
                             <span className="text-[10px] md:text-sm text-text-muted uppercase tracking-widest font-bold">Members</span>
                         </div>
                         <div className="flex flex-col items-center">
-                            <span className="text-3xl md:text-4xl font-black montserrat text-foreground">{stats.events}+</span>
+                            <span className="text-3xl md:text-4xl font-black montserrat text-foreground">{stats.events}</span>
                             <span className="text-[10px] md:text-sm text-text-muted uppercase tracking-widest font-bold">Events</span>
                         </div>
                     </motion.div>

@@ -43,7 +43,7 @@ const Clubs = ({ initialClubs = [], initialCoordinators = [] }: { initialClubs?:
     const students = filteredCoordinators.filter(c => c.type === 'student');
 
     return (
-        <section id="clubs" className="py-24 bg-background">
+        <section id="clubs" className="py-12 bg-background">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <motion.span
@@ -78,9 +78,9 @@ const Clubs = ({ initialClubs = [], initialCoordinators = [] }: { initialClubs?:
                             transition={{ delay: index * 0.1 }}
                             whileHover={{ y: -10 }}
                             onClick={() => setSelectedClub(club)}
-                            className="glass-card group p-6 md:p-10 cursor-pointer border border-white/5 hover:border-primary/30 transition-all"
+                            className="glass-card group p-6 md:p-10 cursor-pointer border border-black/10 hover:border-primary/30 transition-all"
                         >
-                            <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/5 flex items-center justify-center text-3xl md:text-4xl mb-6 group-hover:bg-primary/20 transition-colors">
+                            <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-black/5 flex items-center justify-center text-3xl md:text-4xl mb-6 group-hover:bg-primary/20 transition-colors">
                                 {club.icon}
                             </div>
                             <h3 className="text-xl md:text-2xl font-bold montserrat mb-4">{club.name}</h3>
@@ -98,11 +98,11 @@ const Clubs = ({ initialClubs = [], initialCoordinators = [] }: { initialClubs?:
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-100 bg-[#25343F]/95 backdrop-blur-2xl flex flex-col p-4 md:p-12 overflow-y-auto"
+                        className="fixed inset-0 z-100 bg-background/98 backdrop-blur-2xl flex flex-col p-4 md:p-12 overflow-y-auto"
                         onClick={() => setSelectedClub(null)}
                     >
                         <button
-                            className="fixed top-6 right-6 md:top-8 md:right-8 text-white/60 hover:text-white transition-colors z-110 p-2"
+                            className="fixed top-6 right-6 md:top-8 md:right-8 text-foreground/50 hover:text-foreground transition-colors z-110 p-2"
                             onClick={() => setSelectedClub(null)}
                         >
                             <X size={28} className="md:w-8 md:h-8" />
@@ -128,7 +128,7 @@ const Clubs = ({ initialClubs = [], initialCoordinators = [] }: { initialClubs?:
                                     <div className="flex items-center gap-4 mb-6 md:mb-8">
                                         <ShieldCheck className="text-primary shrink-0" size={20} />
                                         <h4 className="text-lg md:text-xl font-black uppercase tracking-[0.2em]">Faculty Mentors</h4>
-                                        <div className="h-px flex-1 bg-linear-to-r from-white/10 to-transparent" />
+                                        <div className="h-px flex-1 bg-linear-to-r from-black/10 to-transparent" />
                                     </div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                         {faculty.map((member, i) => (
@@ -143,7 +143,7 @@ const Clubs = ({ initialClubs = [], initialCoordinators = [] }: { initialClubs?:
                                     <div className="flex items-center gap-4 mb-6 md:mb-8">
                                         <GraduationCap className="text-primary shrink-0" size={20} />
                                         <h4 className="text-lg md:text-xl font-black uppercase tracking-[0.2em]">Student Leads</h4>
-                                        <div className="h-px flex-1 bg-linear-to-r from-white/10 to-transparent" />
+                                        <div className="h-px flex-1 bg-linear-to-r from-black/10 to-transparent" />
                                     </div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                         {students.map((member, i) => (
@@ -154,7 +154,7 @@ const Clubs = ({ initialClubs = [], initialCoordinators = [] }: { initialClubs?:
                             )}
 
                             {filteredCoordinators.length === 0 && (
-                                <div className="text-center py-16 md:py-20 bg-white/5 rounded-3xl border border-white/10 px-6">
+                                <div className="text-center py-16 md:py-20 bg-black/5 rounded-3xl border border-black/10 px-6">
                                     <p className="text-text-muted text-base md:text-lg">No coordinator details available for this club yet.</p>
                                 </div>
                             )}
@@ -171,7 +171,7 @@ const CoordinatorCard = ({ member, index }: { member: Coordinator; index: number
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: index * 0.1 }}
-        className="glass-card group p-2 bg-white/5 border-white/10"
+        className="glass-card group p-2 bg-secondary/50 border-black/10"
     >
         <div className="relative aspect-4/5 rounded-xl overflow-hidden mb-6">
             <Image
@@ -180,8 +180,8 @@ const CoordinatorCard = ({ member, index }: { member: Coordinator; index: number
                 fill
                 className="object-cover transition-all duration-500 scale-105 group-hover:scale-100"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-[#25343F]/80 via-[#25343F]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
-                <h4 className="text-lg font-bold uppercase leading-tight text-white">{member.name}</h4>
+            <div className="absolute inset-0 bg-linear-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
+                <h4 className="text-lg font-bold uppercase leading-tight text-foreground">{member.name}</h4>
             </div>
         </div>
 

@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { motion } from "framer-motion";
-import { Zap, Shield, RefreshCw, LogOut, Bell, Plus, Trash2, Calendar, Image as ImageIcon, Upload, Loader2, LayoutDashboard, Edit3, Save, X as CloseIcon, UserPlus, Users, CheckCircle2, Mail } from "lucide-react";
+import { Menu, Zap, Shield, RefreshCw, LogOut, Bell, Plus, Trash2, Calendar, Image as ImageIcon, Upload, Loader2, LayoutDashboard, Edit3, Save, X as CloseIcon, UserPlus, Users, CheckCircle2, Mail } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import Image from "next/image";
 import Link from "next/link";
@@ -85,6 +85,7 @@ const AdminPage = () => {
     const [uploading, setUploading] = useState(false);
     const [activeTab, setActiveTab] = useState<'registrations' | 'updates' | 'events' | 'gallery' | 'clubs' | 'coordinators'>('registrations');
     const [userEmail, setUserEmail] = useState<string | null>(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const router = useRouter();
 
@@ -366,7 +367,7 @@ const AdminPage = () => {
 
     if (authLoading) {
         return (
-            <div className="min-h-screen bg-[#25343F] flex items-center justify-center">
+            <div className="min-h-screen bg-background flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4">
                     <Loader2 className="text-primary animate-spin" size={40} />
                     <span className="text-text-muted text-xs font-black uppercase tracking-[0.3em]">Validating Session</span>
@@ -386,15 +387,26 @@ const AdminPage = () => {
     ];
 
     return (
-        <div className="flex min-h-screen bg-[#25343F] text-white">
+        <div className="flex min-h-screen bg-background text-foreground">
+            {/* Mobile Overlay */}
+            {isSidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
-            <aside className="hidden lg:flex flex-col w-72 bg-white/5 backdrop-blur-3xl border-r border-white/10 p-8 fixed h-full z-50">
-                <div className="flex items-center gap-4 justify-center mb-12">
-                    <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-2xl border border-white/10 backdrop-blur-sm">
-                        <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/50 shadow-[0_0_30px_-10px_rgba(255,155,81,0.5)]">
+            <aside className={cn(
+                "flex flex-col w-72 bg-background lg:bg-secondary/50 backdrop-blur-3xl border-r border-black/10 p-6 lg:p-8 fixed inset-y-0 left-0 z-50 transition-transform duration-300 overflow-y-auto pb-24 lg:pb-8",
+                isSidebarOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full lg:translate-x-0"
+            )}>
+                <div className="flex items-center gap-4 justify-center mb-10 pt-4 lg:pt-0">
+                    <div className="flex items-center gap-3 bg-secondary/70 px-4 py-2 rounded-2xl border border-black/10 backdrop-blur-sm shadow-lg">
+                        <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/50 shadow-[0_0_30px_-10px_rgba(250,129,18,0.5)]">
                             <Zap className="text-primary fill-current" size={24} />
                         </div>
-                        <span className="text-2xl font-black montserrat tracking-tighter text-white">EDISON</span>
+                        <span className="text-2xl font-black montserrat tracking-tighter text-foreground">EDISON</span>
                     </div>
                 </div>
 
@@ -402,10 +414,13 @@ const AdminPage = () => {
                     {navItems.map((item) => (
                         <button
                             key={item.id}
-                            onClick={() => setActiveTab(item.id as 'registrations' | 'updates' | 'events' | 'gallery' | 'clubs' | 'coordinators')}
+                            onClick={() => {
+                                setActiveTab(item.id as 'registrations' | 'updates' | 'events' | 'gallery' | 'clubs' | 'coordinators');
+                                setIsSidebarOpen(false);
+                            }}
                             className={cn(
                                 "w-full flex items-center gap-3 px-5 py-4 rounded-xl transition-all font-bold",
-                                activeTab === item.id ? "bg-primary/10 text-primary" : "text-text-muted hover:bg-white/5"
+                                activeTab === item.id ? "bg-primary/10 text-primary shadow-sm" : "text-text-muted hover:bg-black/5"
                             )}
                         >
                             <item.icon size={20} />
@@ -414,7 +429,7 @@ const AdminPage = () => {
                     ))}
                 </nav>
 
-                <div className="mt-auto space-y-2">
+                <div className="mt-auto pt-8 space-y-2">
                     <button
                         onClick={handleLogout}
                         className="w-full flex items-center gap-3 px-5 py-4 rounded-xl text-red-400 hover:bg-red-400/5 transition-all font-bold"
@@ -423,20 +438,28 @@ const AdminPage = () => {
                         Logout
                     </button>
                     <Link href="/" className="flex items-center gap-3 px-5 py-4 rounded-xl text-text-muted hover:text-white transition-all">
-                        <Shield size={20} />
-                        Site Preview
+                        <Shield className="shrink-0" size={20} />
+                        <span>Site Preview</span>
                     </Link>
                 </div>
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 lg:ml-72 p-6 md:p-12">
+            <main className="flex-1 lg:ml-72 p-6 md:p-12 w-full overflow-hidden">
                 <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                    <div>
-                        <span className="text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-2 block">
-                            Security Gateway
-                        </span>
-                        <h1 className="text-4xl font-black montserrat">Admin Console</h1>
+                    <div className="flex items-center gap-4">
+                        <button
+                            className="lg:hidden p-2 bg-black/5 rounded-xl text-primary shrink-0"
+                            onClick={() => setIsSidebarOpen(true)}
+                        >
+                            <Menu size={24} />
+                        </button>
+                        <div>
+                            <span className="text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-2 block">
+                                Security Gateway
+                            </span>
+                            <h1 className="text-2xl md:text-4xl font-black montserrat">Admin Console</h1>
+                        </div>
                     </div>
                     <div className="text-left md:text-right">
                         <span className="text-text-muted text-xs uppercase tracking-widest block mb-1">Connected as</span>
@@ -471,22 +494,22 @@ const AdminPage = () => {
 
                             <div className="flex items-center justify-between mb-8">
                                 <h3 className="text-xl font-bold montserrat">Live Feed</h3>
-                                <button onClick={() => fetchData(true)} className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-primary">
+                                <button onClick={() => fetchData(true)} className="p-2 rounded-lg bg-black/5 hover:bg-black/10 transition-all text-primary">
                                     <RefreshCw size={20} className={cn(loading && "animate-spin")} />
                                 </button>
                             </div>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left">
                                     <thead>
-                                        <tr className="border-b border-white/10 text-[10px] font-black uppercase tracking-[0.2em] text-text-muted">
+                                        <tr className="border-b border-black/10 text-[10px] font-black uppercase tracking-[0.2em] text-text-muted">
                                             <th className="px-4 py-4">Applicant</th>
                                             <th className="px-4 py-4">Roll ID</th>
                                             <th className="px-4 py-4">Domain</th>
 
-                                            <th className="px-4 py-4 text-right">Status</th>
+                                            <th className="px-4 py-4 text-right min-w-[120px]">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-white/5">
+                                    <tbody className="divide-y divide-black/5">
                                         {registrations.map((reg) => (
                                             <tr key={reg.id} className="text-sm">
                                                 <td className="px-4 py-6 font-bold">{reg.name}</td>
@@ -494,7 +517,7 @@ const AdminPage = () => {
                                                 <td className="px-4 py-6 text-primary">{reg.club}</td>
 
                                                 <td className="px-4 py-6 text-right">
-                                                    <div className="flex items-center justify-end gap-2">
+                                                    <div className="flex items-center justify-end gap-2 whitespace-nowrap">
                                                         <button
                                                             onClick={() => handleDeleteRegistration(reg.id)}
                                                             className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-400/20 transition-all mr-2"
@@ -541,9 +564,9 @@ const AdminPage = () => {
                         <div className="glass-card p-6 md:p-8">
 
                             <h3 className="text-xl font-bold montserrat mb-6 flex items-center gap-2"><Plus className="text-primary" /> Broadcast News</h3>
-                            <form onSubmit={handleAddUpdate} className="flex gap-4">
-                                <input type="text" value={newUpdate} onChange={(e) => setNewUpdate(e.target.value)} placeholder="Enter circular message..." className="flex-1 bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none" />
-                                <button type="submit" className="btn-primary px-8 font-bold">Broadcast</button>
+                            <form onSubmit={handleAddUpdate} className="flex flex-col sm:flex-row gap-4">
+                                <input type="text" value={newUpdate} onChange={(e) => setNewUpdate(e.target.value)} placeholder="Enter circular message..." className="flex-1 bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none" />
+                                <button type="submit" className="btn-primary py-4 px-8 font-bold whitespace-nowrap">Broadcast</button>
                             </form>
                         </div>
                         <div className="glass-card p-6 md:p-8">
@@ -551,15 +574,15 @@ const AdminPage = () => {
                             <h3 className="text-xl font-bold montserrat mb-8">Active Feed</h3>
                             <div className="space-y-4">
                                 {updates.map((upd) => (
-                                    <div key={upd.id} className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/10 group">
-                                        <div className="flex items-center gap-4">
-                                            <Bell size={20} className="text-primary" />
+                                    <div key={upd.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-xl bg-black/5 border border-black/10 group gap-4">
+                                        <div className="flex items-start sm:items-center gap-4">
+                                            <Bell size={20} className="text-primary shrink-0 mt-1 sm:mt-0" />
                                             <div>
                                                 <p className="font-medium">{upd.message}</p>
                                                 <p className="text-[10px] text-text-muted uppercase mt-1">{new Date(upd.created_at).toLocaleString()}</p>
                                             </div>
                                         </div>
-                                        <button onClick={() => handleDeleteUpdate(upd.id)} className="p-2 text-red-400 hover:bg-red-400/10 rounded-lg"><Trash2 size={20} /></button>
+                                        <button onClick={() => handleDeleteUpdate(upd.id)} className="p-2 text-red-400 hover:bg-red-400/10 rounded-lg self-end sm:self-auto"><Trash2 size={20} /></button>
                                     </div>
                                 ))}
                             </div>
@@ -573,20 +596,20 @@ const AdminPage = () => {
 
                             <h3 className="text-xl font-bold montserrat mb-6 flex items-center gap-2"><Plus className="text-primary" /> Create Event</h3>
                             <form onSubmit={handleAddEvent} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <input type="text" placeholder="Title" value={newEvent.title} onChange={e => setNewEvent({ ...newEvent, title: e.target.value })} className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
-                                <select value={newEvent.club} onChange={e => setNewEvent({ ...newEvent, club: e.target.value })} className="bg-[#0f172a] border border-white/10 rounded-xl px-5 py-4 outline-none" required>
+                                <input type="text" placeholder="Title" value={newEvent.title} onChange={e => setNewEvent({ ...newEvent, title: e.target.value })} className="bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
+                                <select value={newEvent.club} onChange={e => setNewEvent({ ...newEvent, club: e.target.value })} className="bg-secondary border border-black/10 rounded-xl px-5 py-4 outline-none" required>
                                     <option value="">Select Club</option>
                                     {clubs.map(c => (
                                         <option key={c.id} value={c.name}>{c.name}</option>
                                     ))}
                                 </select>
-                                <input type="date" value={newEvent.date} onChange={e => setNewEvent({ ...newEvent, date: e.target.value })} className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
-                                <div onClick={() => eventInputRef.current?.click()} className="bg-white/5 border-2 border-dashed border-white/10 rounded-xl px-5 py-4 flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-all group">
+                                <input type="date" value={newEvent.date} onChange={e => setNewEvent({ ...newEvent, date: e.target.value })} className="bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
+                                <div onClick={() => eventInputRef.current?.click()} className="bg-black/5 border-2 border-dashed border-black/10 rounded-xl px-5 py-4 flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-all group">
                                     <input type="file" ref={eventInputRef} hidden accept="image/*" onChange={(e) => setEventFile(e.target.files?.[0] || null)} />
                                     {eventFile ? <div className="flex items-center gap-2 text-primary font-bold"><ImageIcon size={20} /><span className="truncate max-w-[200px]">{eventFile.name}</span></div> : <div className="flex flex-col items-center gap-1 text-text-muted group-hover:text-primary transition-colors"><Upload size={24} /><span className="text-xs font-bold uppercase tracking-widest">Select Cover Image</span></div>}
                                 </div>
-                                <input type="text" placeholder="Tags (comma separated)" value={newEvent.tags} onChange={e => setNewEvent({ ...newEvent, tags: e.target.value })} className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none col-span-full" />
-                                <textarea placeholder="Description" value={newEvent.description} onChange={e => setNewEvent({ ...newEvent, description: e.target.value })} className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none col-span-full h-32" required />
+                                <input type="text" placeholder="Tags (comma separated)" value={newEvent.tags} onChange={e => setNewEvent({ ...newEvent, tags: e.target.value })} className="bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none col-span-full" />
+                                <textarea placeholder="Description" value={newEvent.description} onChange={e => setNewEvent({ ...newEvent, description: e.target.value })} className="bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none col-span-full h-32" required />
                                 <button type="submit" disabled={uploading} className="btn-primary py-4 font-bold col-span-full flex items-center justify-center gap-2">{uploading ? <Loader2 className="animate-spin" /> : "Publish Event"}</button>
                             </form>
                         </div>
@@ -595,12 +618,13 @@ const AdminPage = () => {
                             <h3 className="text-xl font-bold montserrat mb-8">Event Management</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {events.map(ev => (
-                                    <div key={ev.id} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden group">
+                                    <div key={ev.id} className="bg-secondary/50 border border-black/10 rounded-2xl overflow-hidden group">
                                         <div className="h-40 overflow-hidden relative">
                                             <Image
                                                 src={ev.image}
                                                 alt={ev.title}
                                                 fill
+                                                unoptimized
                                                 className="object-cover group-hover:scale-110 transition-transform duration-500"
                                             />
                                             <div className="absolute top-4 left-4 bg-primary px-3 py-1 text-[10px] font-black uppercase tracking-widest">{ev.club}</div>
@@ -615,38 +639,42 @@ const AdminPage = () => {
 
                 {activeTab === 'gallery' && (
                     <div className="space-y-8">
-                        <div className="glass-card p-6 md:p-10 text-center">
+                        <div className="glass-card p-6 md:p-10">
 
                             <h3 className="text-xl font-bold montserrat mb-6 flex items-center gap-2"><Plus className="text-primary" /> Add Gallery Item</h3>
                             <form onSubmit={handleAddGalleryItem} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <input type="text" placeholder="Title" value={newGalleryItem.title} onChange={e => setNewGalleryItem({ ...newGalleryItem, title: e.target.value })} className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
-                                <select value={newGalleryItem.club} onChange={e => setNewGalleryItem({ ...newGalleryItem, club: e.target.value })} className="bg-[#0f172a] border border-white/10 rounded-xl px-5 py-4 outline-none" required>
+                                <input type="text" placeholder="Title" value={newGalleryItem.title} onChange={e => setNewGalleryItem({ ...newGalleryItem, title: e.target.value })} className="bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
+                                <select value={newGalleryItem.club} onChange={e => setNewGalleryItem({ ...newGalleryItem, club: e.target.value })} className="bg-secondary border border-black/10 rounded-xl px-5 py-4 outline-none" required>
                                     <option value="">Select Club</option>
                                     {clubs.map(c => (
                                         <option key={c.id} value={c.name}>{c.name}</option>
                                     ))}
                                 </select>
-                                <div onClick={() => galleryInputRef.current?.click()} className="bg-white/5 border-2 border-dashed border-white/10 rounded-xl px-5 py-4 col-span-full flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-all group">
+                                <div onClick={() => galleryInputRef.current?.click()} className="bg-black/5 border-2 border-dashed border-black/10 rounded-xl px-5 py-4 col-span-full flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-all group">
                                     <input type="file" ref={galleryInputRef} hidden accept="image/*" onChange={(e) => setGalleryFile(e.target.files?.[0] || null)} />
                                     {galleryFile ? <div className="flex items-center gap-2 text-primary font-bold"><ImageIcon size={20} /><span className="truncate max-w-[200px]">{galleryFile.name}</span></div> : <div className="flex flex-col items-center gap-1 text-text-muted group-hover:text-primary transition-colors"><Upload size={24} /><span className="text-xs font-bold uppercase tracking-widest">Select Image from Device</span></div>}
                                 </div>
                                 <button type="submit" disabled={uploading} className="btn-primary py-4 font-bold col-span-full flex items-center justify-center gap-2">{uploading ? <Loader2 className="animate-spin" /> : "Upload to Grid"}</button>
                             </form>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            {gallery.map(item => (
-                                <div key={item.id} className="relative group rounded-xl overflow-hidden aspect-video border border-white/10">
-                                    <Image
-                                        src={item.image}
-                                        alt={item.title}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center">
-                                        <p className="text-xs font-bold mb-1">{item.title}</p><p className="text-[10px] text-primary font-black uppercase mb-3">{item.club}</p><button onClick={() => handleDeleteGalleryItem(item.id)} className="bg-red-500/20 text-red-400 p-2 rounded-lg hover:bg-red-500/40 transition-all"><Trash2 size={16} /></button>
+                        <div className="glass-card p-6 md:p-8">
+                            <h3 className="text-xl font-bold montserrat mb-8">Gallery Management</h3>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                {gallery.map(item => (
+                                    <div key={item.id} className="relative group rounded-xl overflow-hidden aspect-video border border-black/10">
+                                        <Image
+                                            src={item.image}
+                                            alt={item.title}
+                                            fill
+                                            unoptimized
+                                            className="object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center">
+                                            <p className="text-xs font-bold mb-1">{item.title}</p><p className="text-[10px] text-primary font-black uppercase mb-3">{item.club}</p><button onClick={() => handleDeleteGalleryItem(item.id)} className="bg-red-500/20 text-red-400 p-2 rounded-lg hover:bg-red-500/40 transition-all"><Trash2 size={16} /></button>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 )}
@@ -663,24 +691,17 @@ const AdminPage = () => {
                                 <form onSubmit={handleUpdateClub} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <label className="text-[10px] font-black uppercase tracking-widest text-text-muted pl-1">Club Name</label>
-                                        <input type="text" value={editingClub.name} onChange={e => setEditingClub({ ...editingClub, name: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-primary" required />
+                                        <input type="text" value={editingClub.name} onChange={e => setEditingClub({ ...editingClub, name: e.target.value })} className="w-full bg-black/5 border border-black/10 rounded-xl px-5 py-4 outline-none focus:border-primary" required />
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-[10px] font-black uppercase tracking-widest text-text-muted pl-1">Icon (Emoji or SVG)</label>
-                                        <input type="text" value={editingClub.icon} onChange={e => setEditingClub({ ...editingClub, icon: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-primary" required />
+                                        <input type="text" value={editingClub.icon} onChange={e => setEditingClub({ ...editingClub, icon: e.target.value })} className="w-full bg-black/5 border border-black/10 rounded-xl px-5 py-4 outline-none focus:border-primary" required />
                                     </div>
                                     <div className="space-y-2 col-span-full">
                                         <label className="text-[10px] font-black uppercase tracking-widest text-text-muted pl-1">Description</label>
-                                        <textarea value={editingClub.description} onChange={e => setEditingClub({ ...editingClub, description: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-primary h-32" required />
+                                        <textarea value={editingClub.description} onChange={e => setEditingClub({ ...editingClub, description: e.target.value })} className="w-full bg-black/5 border border-black/10 rounded-xl px-5 py-4 outline-none focus:border-primary h-32" required />
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-black uppercase tracking-widest text-text-muted pl-1">Faculty Coordinator</label>
-                                        <input type="text" value={editingClub.faculty} onChange={e => setEditingClub({ ...editingClub, faculty: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-primary" required />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-black uppercase tracking-widest text-text-muted pl-1">Student Leads</label>
-                                        <input type="text" value={editingClub.student} onChange={e => setEditingClub({ ...editingClub, student: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-primary" required />
-                                    </div>
+
                                     <button type="submit" className="btn-primary py-4 font-bold col-span-full flex items-center justify-center gap-2"><Save size={18} /> Update Hub Info</button>
                                 </form>
                             </div>
@@ -692,20 +713,9 @@ const AdminPage = () => {
                                         <h4 className="text-xl md:text-2xl font-black montserrat mb-3">{club.name}</h4>
                                         <p className="text-sm text-text-muted leading-relaxed line-clamp-3 mb-8 flex-1">{club.description}</p>
 
-                                        <div className="space-y-4 pt-6 border-t border-white/10 mb-8">
-                                            <div className="flex flex-col gap-1">
-                                                <span className="text-[10px] text-primary font-black uppercase tracking-[0.2em]">Faculty Mentor</span>
-                                                <span className="text-sm text-white font-medium">{club.faculty}</span>
-                                            </div>
-                                            <div className="flex flex-col gap-1">
-                                                <span className="text-[10px] text-primary font-black uppercase tracking-[0.2em]">Student Leads</span>
-                                                <span className="text-sm text-white/80 font-medium line-clamp-2 leading-snug">{club.student}</span>
-                                            </div>
-                                        </div>
-
                                         <button
                                             onClick={() => setEditingClub(club)}
-                                            className="w-full bg-white/5 hover:bg-primary/20 border border-white/10 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 text-text-muted hover:text-primary group/btn"
+                                            className="w-full bg-black/5 hover:bg-primary/20 border border-black/10 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 text-text-muted hover:text-primary group/btn mt-auto"
                                         >
                                             <Edit3 size={16} className="group-hover/btn:scale-110 transition-transform" />
                                             Configure Hub
@@ -723,14 +733,14 @@ const AdminPage = () => {
 
                             <h3 className="text-xl font-bold montserrat mb-6 flex items-center gap-2"><UserPlus className="text-primary" /> Recruit Coordinator</h3>
                             <form onSubmit={handleAddCoordinator} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <input type="text" placeholder="Full Name" value={newCoordinator.name} onChange={e => setNewCoordinator({ ...newCoordinator, name: e.target.value })} className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
-                                <select value={newCoordinator.type} onChange={e => setNewCoordinator({ ...newCoordinator, type: e.target.value as 'student' | 'faculty' })} className="bg-[#0f172a] border border-white/10 rounded-xl px-5 py-4 outline-none" required>
+                                <input type="text" placeholder="Full Name" value={newCoordinator.name} onChange={e => setNewCoordinator({ ...newCoordinator, name: e.target.value })} className="bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
+                                <select value={newCoordinator.type} onChange={e => setNewCoordinator({ ...newCoordinator, type: e.target.value as 'student' | 'faculty' })} className="bg-secondary border border-black/10 rounded-xl px-5 py-4 outline-none" required>
                                     <option value="student">Student Lead</option>
                                     <option value="faculty">Faculty Coordinator</option>
                                 </select>
-                                <input type="text" placeholder="Roll Number (Students only)" value={newCoordinator.roll_number} onChange={e => setNewCoordinator({ ...newCoordinator, roll_number: e.target.value })} className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none" />
-                                <input type="text" placeholder="Mobile Number" value={newCoordinator.mobile} onChange={e => setNewCoordinator({ ...newCoordinator, mobile: e.target.value })} className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
-                                <select value={newCoordinator.club} onChange={e => setNewCoordinator({ ...newCoordinator, club: e.target.value })} className="bg-[#0f172a] border border-white/10 rounded-xl px-5 py-4 outline-none col-span-full" required>
+                                <input type="text" placeholder="Roll Number (Students only)" value={newCoordinator.roll_number} onChange={e => setNewCoordinator({ ...newCoordinator, roll_number: e.target.value })} className="bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none" />
+                                <input type="text" placeholder="Mobile Number" value={newCoordinator.mobile} onChange={e => setNewCoordinator({ ...newCoordinator, mobile: e.target.value })} className="bg-black/5 border border-black/10 rounded-xl px-5 py-4 focus:border-primary outline-none" required />
+                                <select value={newCoordinator.club} onChange={e => setNewCoordinator({ ...newCoordinator, club: e.target.value })} className="bg-secondary border border-black/10 rounded-xl px-5 py-4 outline-none col-span-full" required>
                                     <option value="">Associated Club</option>
                                     {clubs.map(c => (
                                         <option key={c.id} value={c.name}>{c.name}</option>
@@ -739,7 +749,7 @@ const AdminPage = () => {
 
                                 <div
                                     onClick={() => coordinatorInputRef.current?.click()}
-                                    className="bg-white/5 border-2 border-dashed border-white/10 rounded-xl px-5 py-4 col-span-full flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-all group"
+                                    className="bg-black/5 border-2 border-dashed border-black/10 rounded-xl px-5 py-4 col-span-full flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-all group"
                                 >
                                     <input
                                         type="file"
@@ -773,13 +783,14 @@ const AdminPage = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {coordinators.map(coord => (
-                                <div key={coord.id} className="glass-card group relative">
+                                <div key={coord.id} className="glass-card group relative p-6">
                                     <div className="flex items-start gap-5">
                                         <div className="w-20 h-20 rounded-2xl overflow-hidden border border-white/10 shrink-0 relative">
                                             <Image
                                                 src={coord.image}
                                                 alt={coord.name}
                                                 fill
+                                                unoptimized
                                                 className="object-cover"
                                             />
                                         </div>

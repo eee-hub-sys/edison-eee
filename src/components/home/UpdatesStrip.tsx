@@ -51,8 +51,8 @@ const UpdatesStrip = ({ initialUpdates = [] }: { initialUpdates?: string[] }) =>
     }, [updates.length]);
 
     return (
-        <div className="w-full bg-primary/10 border-y border-white/10 overflow-hidden py-4 flex items-center my-16 backdrop-blur-md">
-            <div className="bg-primary text-[#25343F] px-4 py-1.5 text-[10px] md:text-xs font-black montserrat tracking-tighter shrink-0 z-10 shadow-xl ml-4 rounded-sm">
+        <div className="w-full bg-primary/10 border-y border-black/10 overflow-hidden py-4 flex items-center my-8 backdrop-blur-md">
+            <div className="bg-primary text-white px-4 py-1.5 text-[10px] md:text-xs font-black montserrat tracking-tighter shrink-0 z-10 shadow-xl ml-4 rounded-sm">
                 LATEST PULSE
             </div>
             <div className="flex-1 overflow-hidden relative ml-8">
@@ -61,7 +61,7 @@ const UpdatesStrip = ({ initialUpdates = [] }: { initialUpdates?: string[] }) =>
                         <React.Fragment key={groupIndex}>
                             {updates.map((update, i) => (
                                 <div key={`${groupIndex}-${i}`} className="flex items-center gap-6 shrink-0">
-                                    <span className="text-white">
+                                    <span className="text-foreground">
                                         {update}
                                     </span>
                                     <span className="text-primary/40">✦</span>

@@ -20,7 +20,7 @@ const Events = ({ initialEvents = [] }: { initialEvents?: Event[] }) => {
     }, [events.length]);
 
     return (
-        <section id="events" className="py-24">
+        <section id="events" className="py-12">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <motion.span
@@ -53,6 +53,7 @@ const Events = ({ initialEvents = [] }: { initialEvents?: Event[] }) => {
                                     src={event.image}
                                     alt={event.title}
                                     fill
+                                    unoptimized
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 />

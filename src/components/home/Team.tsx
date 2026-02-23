@@ -21,7 +21,7 @@ const Team = () => {
     const students = coordinators.filter(c => c.type === 'student');
 
     return (
-        <section id="network" className="py-20 md:py-24 relative overflow-hidden">
+        <section id="network" className="py-10 md:py-14 relative overflow-hidden">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12 md:mb-16">
                     <motion.span

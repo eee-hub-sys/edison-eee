@@ -24,7 +24,7 @@ const About = () => {
     ];
 
     return (
-        <section id="about" className="py-24 relative overflow-hidden">
+        <section id="about" className="py-12 relative overflow-hidden">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12 md:mb-20">
                     <motion.span
