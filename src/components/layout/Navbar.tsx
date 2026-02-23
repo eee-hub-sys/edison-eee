@@ -72,14 +72,14 @@ const Navbar = () => {
                     scrolled ? "bg-background/80 backdrop-blur-md shadow-xl border-b border-white/10" : "bg-background"
                 )}
             >
-                <div className="max-w-7xl mx-auto flex items-center justify-between">
+                <div className="max-w-7xl mx-auto flex items-center justify-between relative">
                     {/* Brand Name (Mobile) / Placeholder */}
                     <div className="lg:hidden">
                         <span className="text-lg font-black tracking-tighter text-foreground montserrat uppercase">Edison</span>
                     </div>
 
-                    {/* Center: Nav Links */}
-                    <ul className="hidden lg:flex items-center gap-6 xl:gap-8 justify-center flex-1">
+                    {/* Center: Nav Links — absolutely centered */}
+                    <ul className="hidden lg:flex items-center gap-6 xl:gap-8 absolute left-1/2 -translate-x-1/2">
                         {navLinks.map((link) => (
                             <li key={link.name}>
                                 <Link
@@ -93,7 +93,7 @@ const Navbar = () => {
                     </ul>
 
                     {/* Right: Actions */}
-                    <div className="hidden sm:flex items-center justify-end gap-4">
+                    <div className="hidden sm:flex items-center justify-end gap-4 ml-auto">
                         <Link
                             href="#register"
                             className="bg-primary hover:bg-primary/90 text-white text-[10px] lg:text-xs font-bold py-2.5 px-5 rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg shadow-primary/25 uppercase tracking-widest whitespace-nowrap"

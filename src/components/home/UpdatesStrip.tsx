@@ -51,7 +51,7 @@ const UpdatesStrip = ({ initialUpdates = [] }: { initialUpdates?: string[] }) =>
     }, [updates.length]);
 
     return (
-        <div className="w-full bg-primary/10 border-y border-black/10 overflow-hidden py-4 flex items-center my-8 backdrop-blur-md">
+        <div className="w-full bg-primary/10 border-y border-black/10 overflow-hidden py-4 flex items-center backdrop-blur-md">
             <div className="bg-primary text-white px-4 py-1.5 text-[10px] md:text-xs font-black montserrat tracking-tighter shrink-0 z-10 shadow-xl ml-4 rounded-sm">
                 LATEST PULSE
             </div>

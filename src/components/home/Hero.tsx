@@ -105,12 +105,12 @@ const Hero = ({ initialStats = { clubs: 5, members: 0, events: 0 } }: { initialS
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black montserrat tracking-tighter leading-[1.1] md:leading-none mb-6 text-center"
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black montserrat tracking-tighter leading-none mb-6 text-center whitespace-nowrap"
                     >
                         Welcome to{" "}
-                        <span className="bg-clip-text text-transparent bg-linear-to-r from-primary via-accent to-foreground glow-text block sm:inline">
+                        <span className="bg-clip-text text-transparent bg-linear-to-r from-primary via-accent to-foreground glow-text inline">
                             EDISON
-                        </span>
+                        </span>{" "}Club
                     </motion.h1>
 
                     <motion.div

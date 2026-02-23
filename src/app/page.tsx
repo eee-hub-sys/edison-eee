@@ -30,8 +30,8 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
-      <Hero initialStats={stats} />
       <UpdatesStrip initialUpdates={initialUpdates} />
+      <Hero initialStats={stats} />
       <div className="max-w-7xl mx-auto px-6 space-y-20 md:space-y-32 py-12 md:py-20">
         <About />
         <Clubs initialClubs={clubs} initialCoordinators={coordinators} />
