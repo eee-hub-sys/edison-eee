@@ -77,7 +77,7 @@ const UpdatesStrip = ({ initialUpdates = [] }: { initialUpdates?: string[] }) =>
           100% { transform: translateX(-10%); }
         }
         .animate-marquee {
-          animation: marquee 12s linear infinite;
+          animation: marquee 6s linear infinite;
         }
         .animate-marquee:hover {
           animation-play-state: paused;
