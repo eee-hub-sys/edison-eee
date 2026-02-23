@@ -41,7 +41,7 @@ const Navbar = () => {
     return (
         <header className="relative w-full z-100 bg-background">
             {/* Top Branding Bar */}
-            <div className="bg-background py-3 px-4 md:px-12 flex justify-between items-center border-b border-white/10">
+            <div className="bg-background py-3 px-4 md:px-12 flex justify-between items-center border-b border-black/10">
                 {/* Top Left: Vignan Logo */}
                 <div className="relative w-32 h-10 md:w-56 md:h-14">
                     <Image
@@ -69,7 +69,7 @@ const Navbar = () => {
             <nav
                 className={cn(
                     "sticky top-0 left-0 w-full transition-all duration-300 py-3 px-4 md:px-8 lg:px-12",
-                    scrolled ? "bg-background/80 backdrop-blur-md shadow-xl border-b border-white/10" : "bg-background"
+                    scrolled ? "bg-background/80 backdrop-blur-md shadow-xl border-b border-black/10" : "bg-background"
                 )}
             >
                 <div className="max-w-7xl mx-auto flex items-center justify-between relative">

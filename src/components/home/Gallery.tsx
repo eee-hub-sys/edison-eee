@@ -64,7 +64,7 @@ const Gallery = ({ initialGallery = [] }: { initialGallery?: GalleryItem[] }) =>
                                     setSelectedGroup(group);
                                     setCurrentIndex(0);
                                 }}
-                                className="relative group cursor-pointer overflow-hidden rounded-2xl border border-white/10 break-inside-avoid"
+                                className="relative group cursor-pointer overflow-hidden rounded-2xl border border-black/10 break-inside-avoid"
                             >
                                 <Image
                                     src={item.image}
@@ -76,12 +76,12 @@ const Gallery = ({ initialGallery = [] }: { initialGallery?: GalleryItem[] }) =>
                                     className="w-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 {group.length > 1 && (
-                                    <div className="absolute top-4 right-4 bg-[#25343F]/80 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 text-white/90 z-10 shadow-lg">
+                                    <div className="absolute top-4 right-4 bg-foreground/80 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 text-white/90 z-10 shadow-lg">
                                         <Images size={14} />
                                         <span className="text-xs font-bold">{group.length}</span>
                                     </div>
                                 )}
-                                <div className="absolute inset-0 bg-linear-to-t from-[#25343F]/80 via-[#25343F]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
+                                <div className="absolute inset-0 bg-linear-to-t from-foreground/80 via-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
                                     <div className="flex items-center justify-between">
                                         <div className="min-w-0">
                                             <span className="text-primary text-[10px] font-black uppercase tracking-widest mb-1 block">
@@ -106,7 +106,7 @@ const Gallery = ({ initialGallery = [] }: { initialGallery?: GalleryItem[] }) =>
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-110 bg-[#25343F]/98 backdrop-blur-xl flex flex-col items-center justify-center p-4 md:p-12"
+                        className="fixed inset-0 z-110 bg-foreground/98 backdrop-blur-xl flex flex-col items-center justify-center p-4 md:p-12"
                         onClick={() => setSelectedGroup(null)}
                     >
                         <button

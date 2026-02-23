@@ -82,7 +82,7 @@ const Events = ({ initialEvents = [] }: { initialEvents?: Event[] }) => {
                                     {event.tags?.map((tag, i) => (
                                         <span
                                             key={i}
-                                            className="text-[9px] md:text-[10px] uppercase font-black tracking-widest bg-white/5 border border-white/10 px-2 md:px-3 py-1 rounded-full text-text-muted flex items-center gap-1"
+                                            className="text-[9px] md:text-[10px] uppercase font-black tracking-widest bg-black/5 border border-black/10 px-2 md:px-3 py-1 rounded-full text-text-muted flex items-center gap-1"
                                         >
                                             <Tag size={10} className="text-primary/60" />
                                             {tag}

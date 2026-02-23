@@ -129,7 +129,7 @@ const Registration = () => {
                                                         required
                                                         value={formData.name}
                                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                        className="w-full bg-white/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base"
+                                                        className="w-full bg-black/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base"
                                                         placeholder="John Doe"
                                                     />
                                                 </div>
@@ -142,7 +142,7 @@ const Registration = () => {
                                                         required
                                                         value={formData.email}
                                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                        className="w-full bg-white/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base"
+                                                        className="w-full bg-black/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base"
                                                         placeholder="john@example.com"
                                                     />
                                                 </div>
@@ -158,7 +158,7 @@ const Registration = () => {
                                                         required
                                                         value={formData.roll_number}
                                                         onChange={(e) => setFormData({ ...formData, roll_number: e.target.value })}
-                                                        className="w-full bg-white/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base"
+                                                        className="w-full bg-black/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base"
                                                         placeholder="EEE2024..."
                                                     />
                                                 </div>
@@ -172,7 +172,7 @@ const Registration = () => {
                                                         pattern="[0-9]{10}"
                                                         value={formData.mobile}
                                                         onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                                                        className="w-full bg-white/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base"
+                                                        className="w-full bg-black/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base"
                                                         placeholder="10 Digits"
                                                     />
                                                 </div>
@@ -186,7 +186,7 @@ const Registration = () => {
                                                         required
                                                         value={formData.club}
                                                         onChange={(e) => setFormData({ ...formData, club: e.target.value })}
-                                                        className="w-full bg-white/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none text-sm md:text-base"
+                                                        className="w-full bg-black/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none text-sm md:text-base"
                                                     >
                                                         <option value="" className="bg-background">Select Domain</option>
                                                         {clubs.length > 0 ? (
@@ -214,7 +214,7 @@ const Registration = () => {
                                                         required
                                                         value={formData.year}
                                                         onChange={(e) => setFormData({ ...formData, year: e.target.value })}
-                                                        className="w-full bg-white/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none text-sm md:text-base"
+                                                        className="w-full bg-black/5 border border-primary/40 rounded-xl px-4 md:px-5 py-3 md:py-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none text-sm md:text-base"
                                                     >
                                                         <option value="" className="bg-background">Current Year</option>
                                                         <option value="1" className="bg-background">1st Year</option>

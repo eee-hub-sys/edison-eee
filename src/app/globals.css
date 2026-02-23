@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAF3E1;
-  --foreground: #222222;
-  --primary: #FA8112;
-  --secondary: #F5E7C6;
-  --accent: #222222;
-  --text-muted: #6B5E4E;
+  --background: #FEFFD3;
+  --foreground: #1A1A1A;
+  --primary: #A82323;
+  --secondary: #BCD9A2;
+  --accent: #6D9E51;
+  --text-muted: #5A5A4A;
 }
 
 @theme inline {
@@ -43,7 +43,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_4px_15px_#FA811266] hover:shadow-[0_6px_20px_#FA811299];
+    @apply bg-primary text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_4px_15px_#A8232366] hover:shadow-[0_6px_20px_#A8232399];
   }
 
   .glass-card {
@@ -51,6 +51,14 @@
   }
 
   .glow-text {
-    text-shadow: 0 0 20px #FA811280;
+    text-shadow: 0 0 20px #A8232380;
   }
+
+  .highlight {
+    @apply text-primary font-bold;
+  }
+}
+
+::selection {
+  @apply bg-primary/20 text-primary;
 }

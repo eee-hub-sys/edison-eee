@@ -11,7 +11,7 @@ const Footer = () => {
 
     if (isAdminPage) return null;
     return (
-        <footer className="pt-16 md:pt-24 pb-8 md:pb-12 mt-16 md:mt-24 border-t border-white/10 relative overflow-hidden">
+        <footer className="pt-16 md:pt-24 pb-8 md:pb-12 mt-16 md:mt-24 border-t border-black/10 relative overflow-hidden">
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16 text-center md:text-left">
                     <div className="lg:col-span-1">
@@ -31,7 +31,7 @@ const Footer = () => {
                                 <li key={item}>
                                     <Link
                                         href={`#${item.toLowerCase()}`}
-                                        className="text-sm md:text-base text-text-muted hover:text-white transition-colors"
+                                        className="text-sm md:text-base text-text-muted hover:text-primary transition-colors"
                                     >
                                         {item}
                                     </Link>
@@ -59,7 +59,7 @@ const Footer = () => {
                         <p className="text-xs md:text-sm text-text-muted mb-6">Access the mission control dashboard.</p>
                         <Link
                             href="/admin"
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-primary/10 hover:border-primary/20 transition-all font-bold group text-sm md:text-base"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-black/5 border border-black/10 hover:bg-primary/10 hover:border-primary/20 transition-all font-bold group text-sm md:text-base"
                         >
                             Control Center
                             <Zap size={14} className="group-hover:fill-current transition-all" />
@@ -67,12 +67,12 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="pt-8 md:pt-12 border-t border-white/5 text-center flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="pt-8 md:pt-12 border-t border-black/5 text-center flex flex-col md:flex-row items-center justify-between gap-6">
                     <p className="text-xs md:text-sm text-text-muted">
                         © 2026 <span className="text-primary font-bold">EDISON EEE</span>. All technical systems online.
                     </p>
                     <div className="flex items-center gap-6">
-                        <Link href="https://vitsitdepartment.vercel.app/clubs" target="_blank" className="text-[10px] md:text-sm text-text-muted hover:text-white transition-colors">Developed by <span className="text-primary font-bold">NG-DSDC, DEPT OF IT</span></Link>
+                        <Link href="https://vitsitdepartment.vercel.app/clubs" target="_blank" className="text-[10px] md:text-sm text-text-muted hover:text-primary transition-colors">Developed by <span className="text-primary font-bold">NG-DSDC, DEPT OF IT</span></Link>
                     </div>
                 </div>
             </div>

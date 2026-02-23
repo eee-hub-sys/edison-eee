@@ -59,7 +59,7 @@ const About = () => {
                             transition={{ delay: index * 0.1 }}
                             className="glass-card flex flex-col items-center text-center group p-8 md:p-10 lg:px-12 lg:py-14"
                         >
-                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/5 flex items-center justify-center mb-6 md:mb-8 border border-white/10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all">
+                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-black/5 flex items-center justify-center mb-6 md:mb-8 border border-black/10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all">
                                 <div className="w-8 h-8 md:w-10 md:h-10 text-primary">
                                     {card.icon}
                                 </div>

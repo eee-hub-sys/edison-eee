@@ -77,7 +77,7 @@ const Hero = ({ initialStats = { clubs: 5, members: 0, events: 0 } }: { initialS
                         {/* Vignan Logo */}
 
                         {/* EEE Logo */}
-                        <div className="relative p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm flex items-center justify-center">
+                        <div className="relative p-4 bg-black/5 rounded-2xl border border-black/10 backdrop-blur-sm flex items-center justify-center">
                             <Image
                                 src="/eee-logo.png"
                                 alt="EEE Logo"
@@ -85,7 +85,7 @@ const Hero = ({ initialStats = { clubs: 5, members: 0, events: 0 } }: { initialS
                                 height={120}
                                 priority
                                 className="w-20 h-auto md:w-28 md:h-auto object-contain"
-                                style={{ filter: "invert(1) grayscale(1) brightness(2)", height: "auto" }}
+                                style={{ height: "auto" }}
                             />
                         </div>
                         <div className="absolute inset-0 bg-primary/10 rounded-full blur-3xl -z-1" />
@@ -95,9 +95,9 @@ const Hero = ({ initialStats = { clubs: 5, members: 0, events: 0 } }: { initialS
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="inline-flex items-center gap-2 px-4 md:px-6 py-2.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] md:text-sm font-black mb-8 md:mb-10 tracking-widest md:tracking-[0.2em] uppercase shadow-[0_0_20px_rgba(255,155,81,0.2)] backdrop-blur-md max-w-[90vw] md:max-w-none"
+                        className="inline-flex items-center gap-2 px-4 md:px-6 py-2.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] md:text-sm font-black mb-8 md:mb-10 tracking-widest md:tracking-[0.2em] uppercase shadow-[0_0_20px_rgba(168,35,35,0.2)] backdrop-blur-md max-w-[90vw] md:max-w-none"
                     >
-                        <span className="w-2 h-2 shrink-0 rounded-full bg-primary animate-pulse shadow-[0_0_10px_#FF9B51]" />
+                        <span className="w-2 h-2 shrink-0 rounded-full bg-primary animate-pulse shadow-[0_0_10px_#A82323]" />
                         <span className="truncate">Department of Electrical & Electronics Engineering</span>
                     </motion.div>
 
@@ -146,7 +146,7 @@ const Hero = ({ initialStats = { clubs: 5, members: 0, events: 0 } }: { initialS
                         </Link>
                         <Link
                             href="#register"
-                            className="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-all font-bold"
+                            className="px-8 py-3 rounded-full border border-black/20 hover:bg-black/10 transition-all font-bold"
                         >
                             Join Community
                         </Link>
