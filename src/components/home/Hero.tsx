@@ -109,7 +109,7 @@ const Hero = ({ initialStats = { clubs: 5, members: 0, events: 0 } }: { initialS
                     >
                         Welcome to{" "}
                         <span className="bg-clip-text text-transparent bg-linear-to-r from-primary via-accent to-foreground glow-text inline">
-                            EDISON
+                            EDISON's
                         </span>{" "}Club
                     </motion.h1>
 
