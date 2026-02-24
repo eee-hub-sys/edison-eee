@@ -841,7 +841,7 @@ const AdminPage = () => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/70 backdrop-blur-md"
+                                className="fixed inset-0 z-100 flex items-center justify-center p-6 bg-black/70 backdrop-blur-md"
                                 onClick={() => setSelectedCoordinator(null)}
                             >
                                 <motion.div
@@ -916,7 +916,7 @@ const AdminPage = () => {
                                             </div>
 
                                             {/* Divider */}
-                                            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-5" />
+                                            <div className="h-px bg-linear-to-r from-transparent via-white/20 to-transparent mb-5" />
 
                                             {/* Bottom Info Row */}
                                             <div className="grid grid-cols-2 gap-4">
