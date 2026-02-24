@@ -86,6 +86,7 @@ const AdminPage = () => {
     const [activeTab, setActiveTab] = useState<'registrations' | 'updates' | 'events' | 'gallery' | 'clubs' | 'coordinators'>('registrations');
     const [userEmail, setUserEmail] = useState<string | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [selectedCoordinator, setSelectedCoordinator] = useState<Coordinator | null>(null);
 
     const router = useRouter();
 
@@ -783,7 +784,11 @@ const AdminPage = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {coordinators.map(coord => (
-                                <div key={coord.id} className="glass-card group relative p-6">
+                                <div
+                                    key={coord.id}
+                                    className="glass-card group relative p-6 cursor-pointer hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+                                    onClick={() => setSelectedCoordinator(coord)}
+                                >
                                     <div className="flex items-start gap-5">
                                         <div className="w-20 h-20 rounded-2xl overflow-hidden border border-white/10 shrink-0 relative">
                                             <Image
@@ -806,7 +811,10 @@ const AdminPage = () => {
                                             <h4 className="font-bold truncate text-white uppercase tracking-tight">{coord.name}</h4>
                                             <p className="text-[10px] text-primary font-black uppercase tracking-widest mt-1 truncate">{coord.club}</p>
                                         </div>
-                                        <button onClick={() => handleDeleteCoordinator(coord.id)} className="p-2 text-red-400/50 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all">
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); handleDeleteCoordinator(coord.id); }}
+                                            className="p-2 text-red-400/50 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
+                                        >
                                             <Trash2 size={16} />
                                         </button>
                                     </div>
@@ -820,9 +828,130 @@ const AdminPage = () => {
                                             <span className="text-[10px] font-bold text-white/80">{coord.mobile}</span>
                                         </div>
                                     </div>
+                                    <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span className="text-[8px] font-black uppercase tracking-widest text-primary/60">Click to view ID</span>
+                                    </div>
                                 </div>
                             ))}
                         </div>
+
+                        {/* ID Card Modal */}
+                        {selectedCoordinator && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/70 backdrop-blur-md"
+                                onClick={() => setSelectedCoordinator(null)}
+                            >
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.85, y: 30 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.85, y: 30 }}
+                                    transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+                                    className="relative w-full max-w-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    {/* ID Card */}
+                                    <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/10" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }}>
+                                        {/* Card Header Strip */}
+                                        <div className="h-2 w-full" style={{ background: 'linear-gradient(90deg, #a82323, #c0392b, #e74c3c)' }} />
+
+                                        {/* Institution Header */}
+                                        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-white/10">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-9 h-9 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/40">
+                                                    <Zap className="text-primary fill-current" size={18} />
+                                                </div>
+                                                <div>
+                                                    <p className="text-[9px] font-black uppercase tracking-[0.25em] text-white/50">Edison EEE</p>
+                                                    <p className="text-[10px] font-black uppercase tracking-widest text-white">Dept. of EEE</p>
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-[8px] font-black uppercase tracking-widest text-white/40">Identity Card</p>
+                                                <p className="text-[10px] font-bold text-primary">2025–2026</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Card Body */}
+                                        <div className="p-6">
+                                            <div className="flex gap-5 mb-6">
+                                                {/* Photo */}
+                                                <div className="shrink-0">
+                                                    <div className="w-24 h-28 rounded-2xl overflow-hidden border-2 border-primary/50 shadow-lg shadow-primary/20 relative">
+                                                        <Image
+                                                            src={selectedCoordinator.image}
+                                                            alt={selectedCoordinator.name}
+                                                            fill
+                                                            unoptimized
+                                                            className="object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className={cn(
+                                                        "mt-2 text-center py-1 rounded-lg text-[8px] font-black uppercase tracking-wider",
+                                                        selectedCoordinator.type === 'faculty' ? "bg-purple-500/20 text-purple-400 border border-purple-500/30" : "bg-primary/20 text-primary border border-primary/30"
+                                                    )}>
+                                                        {selectedCoordinator.type === 'faculty' ? 'Faculty' : 'Student Lead'}
+                                                    </div>
+                                                </div>
+
+                                                {/* Info */}
+                                                <div className="flex-1 min-w-0 space-y-3">
+                                                    <div>
+                                                        <p className="text-[8px] font-black uppercase tracking-[0.2em] text-white/40 mb-0.5">Full Name</p>
+                                                        <p className="text-base font-black uppercase tracking-tight text-white leading-tight">{selectedCoordinator.name}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-[8px] font-black uppercase tracking-[0.2em] text-white/40 mb-0.5">Club</p>
+                                                        <p className="text-xs font-bold text-primary uppercase tracking-widest">{selectedCoordinator.club}</p>
+                                                    </div>
+                                                    {selectedCoordinator.roll_number && (
+                                                        <div>
+                                                            <p className="text-[8px] font-black uppercase tracking-[0.2em] text-white/40 mb-0.5">Roll Number</p>
+                                                            <p className="text-sm font-black font-mono text-yellow-400 tracking-wider">{selectedCoordinator.roll_number}</p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            {/* Divider */}
+                                            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-5" />
+
+                                            {/* Bottom Info Row */}
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div className="bg-white/5 rounded-xl p-3 border border-white/10">
+                                                    <p className="text-[8px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Contact</p>
+                                                    <p className="text-xs font-bold text-white font-mono">{selectedCoordinator.mobile}</p>
+                                                </div>
+                                                <div className="bg-white/5 rounded-xl p-3 border border-white/10">
+                                                    <p className="text-[8px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Department</p>
+                                                    <p className="text-xs font-bold text-white">EEE</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Card Footer */}
+                                        <div className="px-6 pb-5">
+                                            <div className="bg-primary/10 border border-primary/20 rounded-xl p-3 text-center">
+                                                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/80">Vignan Institute of Technology and Science</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Bottom Strip */}
+                                        <div className="h-1.5 w-full" style={{ background: 'linear-gradient(90deg, #e74c3c, #c0392b, #a82323)' }} />
+                                    </div>
+
+                                    {/* Close button */}
+                                    <button
+                                        onClick={() => setSelectedCoordinator(null)}
+                                        className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-black border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/40 transition-all shadow-lg"
+                                    >
+                                        <CloseIcon size={14} />
+                                    </button>
+                                </motion.div>
+                            </motion.div>
+                        )}
                     </div>
                 )}
             </main>
